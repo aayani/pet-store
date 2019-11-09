@@ -1,0 +1,7 @@
+{
+  "extends": ["eslint:recommended", "prettier"],
+  "plugins": ["prettier"],
+  "parserOptions": { "ecmaVersion": 2019 },
+  "env": { "node": true, "es6": true },
+  "rules": { "prettier/prettier": ["error"] }
+}
