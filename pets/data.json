@@ -1,10 +1,18 @@
 [
   {
     "id": "7a530169-19a4-451a-9885-7a5e24e065cb",
-    "name": "Cat"
+    "name": "Tom",
+    "type": "cat",
+    "colour": "black",
+    "age": 2,
+    "breed": "Persian"
   },
   {
     "id": "09706eb2-01e5-4dc5-bb6f-12c8716d4086",
-    "name": "Dog"
+    "name": "Butch",
+    "type": "dog",
+    "colour": "grey",
+    "age": 3,
+    "breed": "British Bulldog"
   }
 ]
