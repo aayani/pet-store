@@ -9,7 +9,7 @@
     "lint": "eslint server.js src",
     "start": "node dist/server.js",
     "start:dev": "NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
-    "start:prod": "NODE_ENV=production npm-run-all test clean compile start",
+    "start:prod": "NODE_ENV=production npm-run-all clean compile start",
     "test": "mocha --require @babel/register"
   },
   "dependencies": {
@@ -17,6 +17,7 @@
     "chalk": "^3.0.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
+    "regenerator-runtime": "^0.13.3",
     "uuid": "^3.3.3"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "nodemon": "^1.19.4",
     "npm-run-all": "^4.1.5",
     "prettier": "^1.19.1",
-    "regenerator-runtime": "^0.13.3",
     "rimraf": "^3.0.0"
   },
   "license": "MIT"
