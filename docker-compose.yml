@@ -1,0 +1,20 @@
+version: "3"
+services:
+  pets:
+    build: "./pets"
+    image: "pet-store-pets-service:latest"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./pets/data.json:/usr/src/app/data.json
+    environment:
+      - NODE_ENV=production
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - pets
