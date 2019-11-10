@@ -3,13 +3,41 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "build": "npm-run-all test clean compile",
+    "clean": "rimraf dist",
+    "compile": "babel . --only server.js,src --out-dir dist",
+    "lint": "eslint server.js src",
+    "start": "node dist/server.js",
+    "start:dev": "NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
+    "start:prod": "NODE_ENV=production npm-run-all test clean compile start",
+    "test": "mocha --require @babel/register"
+  },
+  "dependencies": {
+    "apollo-server-express": "^2.9.7",
+    "chalk": "^3.0.0",
+    "express": "^4.17.1",
+    "graphql": "^14.5.8",
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.7.2",
+    "@babel/node": "^7.7.0",
+    "@babel/preset-env": "^7.7.1",
+    "@babel/register": "^7.7.0",
+    "babel-minify": "^0.5.1",
+    "chai": "^4.2.0",
+    "chai-arrays": "^2.0.0",
+    "chai-uuid": "^1.0.6",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.19.1"
+    "mocha": "^6.2.2",
+    "nodemon": "^1.19.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "regenerator-runtime": "^0.13.3",
+    "rimraf": "^3.0.0"
   },
   "license": "MIT"
 }
