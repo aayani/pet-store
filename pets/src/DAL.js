@@ -30,6 +30,11 @@ export const create = async body => {
   return newPet;
 };
 
+export const remove = async id => {
+  const pets = await readData();
+  await writeData(pets.filter(pet => pet.id !== id));
+};
+
 export const update = async (id, body) => {
   const pets = await readData();
   let updatedPet = null;
