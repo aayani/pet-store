@@ -2,15 +2,19 @@ import fs from 'fs';
 import request from 'request';
 
 export const doPost = (url, body) =>
-  new Promise((resolve, reject) => {
-    request.post(url, { body }, (err, data) => {
-      if (err) {
-        reject(err);
-      }
+  new Promise((resolve, reject) =>
+    request.post(
+      url,
+      { headers: { 'Content-Type': 'application/json' }, body },
+      (err, data) => {
+        if (err) {
+          reject(err);
+        }
 
-      resolve(data);
-    });
-  });
+        resolve(JSON.parse(data.body));
+      }
+    )
+  );
 
 export const readFile = path =>
   new Promise((resolve, reject) =>

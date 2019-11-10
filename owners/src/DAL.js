@@ -1,5 +1,6 @@
 import Logger from './Logger';
-import { readFile, writeFile } from './utils';
+import { PETS_SERVICE_PATH } from './constants';
+import { readFile, writeFile, doPost } from './utils';
 
 const readData = async () => {
   try {
@@ -20,22 +21,49 @@ const writeData = async content => {
   }
 };
 
+const getAllPets = () =>
+  doPost(
+    PETS_SERVICE_PATH,
+    `{ "query": "query { pets {  id, name, type, colour, age, breed }}" }`
+  ).then(({ data }) => data.pets);
+
 export const findById = async id => {
-  const owners = await readData();
-  return owners.find(p => p.id === id);
+  const [owners, pets] = await Promise.all([readData(), getAllPets()]);
+  const owner = owners.find(p => p.id === id);
+
+  if (owner) {
+    return {
+      ...owner,
+      pets: owner.pets.map(petId => pets.find(p => p.id === petId)),
+    };
+  }
+
+  throw new Error('Not found');
 };
 
-export const findAll = readData;
+export const findAll = async () => {
+  const [owners, pets] = await Promise.all([readData(), getAllPets()]);
+
+  return owners.map(owner => ({
+    ...owner,
+    pets: owner.pets.map(petId => pets.find(pet => pet.id === petId)),
+  }));
+};
 
 export const addPet = async (ownerId, petId) => {
   const owners = await readData();
   let updatedOwner = null;
   const updatedOwners = owners.map(owner => {
     if (owner.id === ownerId) {
-      updatedOwner = {
-        ...owner,
-        pets: [...owner.pets, petId],
-      };
+      // to ensure idempotency and avoid pet ID duplication
+      if (owner.pets.find(p => p === petId)) {
+        updatedOwner = owner;
+      } else {
+        updatedOwner = {
+          ...owner,
+          pets: [...owner.pets, petId],
+        };
+      }
       return updatedOwner;
     }
 
@@ -44,7 +72,7 @@ export const addPet = async (ownerId, petId) => {
 
   if (updatedOwner) {
     await writeData(updatedOwners);
-    return updatedOwner;
+    return findById(updatedOwner.id);
   }
 
   throw new Error('Not found');
@@ -57,7 +85,7 @@ export const removePet = async (ownerId, petId) => {
     if (owner.id === ownerId) {
       updatedOwner = {
         ...owner,
-        pets: owner.pets.filter(p => p.id !== petId),
+        pets: owner.pets.filter(p => p !== petId),
       };
       return updatedOwner;
     }
@@ -65,7 +93,7 @@ export const removePet = async (ownerId, petId) => {
 
   if (updatedOwner) {
     await writeData(updatedOwners);
-    return updatedOwner;
+    return findById(updatedOwner.id);
   }
 
   throw new Error('Not found');

@@ -17,7 +17,7 @@ export default gql`
     address: String
     phone: String
     email: String
-    pets: [String]
+    pets: [Pet]
   }
 
   type Pet {
