@@ -1,1 +1,82 @@
-[]
+[
+  {
+    "name": "Yuri",
+    "type": "dog",
+    "colour": "grey",
+    "age": 2,
+    "breed": "Huskie",
+    "id": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "name": "Butch",
+    "type": "dog",
+    "colour": "white",
+    "age": 3,
+    "breed": "Bulldog",
+    "id": "00000000-0000-0000-0000-000000000001"
+  },
+  {
+    "name": "Scooby",
+    "type": "dog",
+    "colour": "brown",
+    "age": 5,
+    "breed": "Great Dane",
+    "id": "00000000-0000-0000-0000-000000000002"
+  },
+  {
+    "name": "Scrappy",
+    "type": "dog",
+    "colour": "brown",
+    "age": 1,
+    "breed": "Great Dane",
+    "id": "00000000-0000-0000-0000-000000000003"
+  },
+  {
+    "name": "Felix",
+    "type": "cat",
+    "colour": "black",
+    "age": 3,
+    "breed": "Tuxedo",
+    "id": "00000000-0000-0000-0000-000000000004"
+  },
+  {
+    "name": "Misty",
+    "type": "cat",
+    "colour": "grey",
+    "age": 1,
+    "breed": "Siamese",
+    "id": "00000000-0000-0000-0000-000000000005"
+  },
+  {
+    "name": "Shadow",
+    "type": "cat",
+    "colour": "black",
+    "age": 4,
+    "breed": "Bombay",
+    "id": "00000000-0000-0000-0000-000000000006"
+  },
+  {
+    "name": "Dolly",
+    "type": "cat",
+    "colour": "white",
+    "age": 2,
+    "breed": "Ragdoll",
+    "id": "00000000-0000-0000-0000-000000000007"
+  },
+  {
+    "name": "Patch",
+    "type": "cat",
+    "colour": "white",
+    "age": 5,
+    "breed": "Birman",
+    "id": "00000000-0000-0000-0000-000000000008"
+  },
+  {
+    "name": "Garfield",
+    "type": "cat",
+    "colour": "Orange",
+    "age": 5,
+    "breed": "Shorthair",
+    "id": "00000000-0000-0000-0000-000000000009"
+  }
+]
