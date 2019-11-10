@@ -64,6 +64,7 @@ export const addPet = async (ownerId, petId) => {
           pets: [...owner.pets, petId],
         };
       }
+
       return updatedOwner;
     }
 

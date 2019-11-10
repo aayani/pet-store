@@ -12,8 +12,8 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  introspection: true,
-  playground: true || process.env.NODE_ENV === 'development',
+  introspection: process.env.NODE_ENV === 'development',
+  playground: process.env.NODE_ENV === 'development',
 });
 server.applyMiddleware({ app, path: '/pets/graphql' });
 
