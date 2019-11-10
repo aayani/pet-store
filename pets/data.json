@@ -5,7 +5,7 @@
     "colour": "grey",
     "age": 2,
     "breed": "Huskie",
-    "id": "cda8f422-7ace-4608-8b02-f893436904cc"
+    "id": "00000000-0000-0000-0000-000000000000"
   },
   {
     "name": "Butch",
@@ -13,7 +13,7 @@
     "colour": "white",
     "age": 3,
     "breed": "Bulldog",
-    "id": "4c94b217-df84-47bf-b99f-6e2b9cd39265"
+    "id": "00000000-0000-0000-0000-000000000001"
   },
   {
     "name": "Scooby",
@@ -21,7 +21,7 @@
     "colour": "brown",
     "age": 5,
     "breed": "Great Dane",
-    "id": "5b66a2bf-1a6b-4514-9a50-1a10b9884f8f"
+    "id": "00000000-0000-0000-0000-000000000002"
   },
   {
     "name": "Scrappy",
@@ -29,7 +29,7 @@
     "colour": "brown",
     "age": 1,
     "breed": "Great Dane",
-    "id": "ae17170c-e339-4fba-95ae-60e4e5a10d49"
+    "id": "00000000-0000-0000-0000-000000000003"
   },
   {
     "name": "Felix",
@@ -37,7 +37,7 @@
     "colour": "black",
     "age": 3,
     "breed": "Tuxedo",
-    "id": "0775fd9f-b279-4209-b19b-2a393a78a94f"
+    "id": "00000000-0000-0000-0000-000000000004"
   },
   {
     "name": "Misty",
@@ -45,7 +45,7 @@
     "colour": "grey",
     "age": 1,
     "breed": "Siamese",
-    "id": "55443ae4-9285-41a4-b029-3b265b441ab3"
+    "id": "00000000-0000-0000-0000-000000000005"
   },
   {
     "name": "Shadow",
@@ -53,7 +53,7 @@
     "colour": "black",
     "age": 4,
     "breed": "Bombay",
-    "id": "0f65b645-0e6a-4e71-b153-2488f43e8be8"
+    "id": "00000000-0000-0000-0000-000000000006"
   },
   {
     "name": "Dolly",
@@ -61,7 +61,7 @@
     "colour": "white",
     "age": 2,
     "breed": "Ragdoll",
-    "id": "8371b271-17f6-4bc7-8734-f93babf21467"
+    "id": "00000000-0000-0000-0000-000000000007"
   },
   {
     "name": "Patch",
@@ -69,7 +69,7 @@
     "colour": "white",
     "age": 5,
     "breed": "Birman",
-    "id": "a9d11ccc-6148-4bea-837d-41d4c81cdebf"
+    "id": "00000000-0000-0000-0000-000000000008"
   },
   {
     "name": "Garfield",
@@ -77,6 +77,6 @@
     "colour": "Orange",
     "age": 5,
     "breed": "Shorthair",
-    "id": "1b5fdb3e-f111-41d7-b059-34b87b77c9e7"
+    "id": "00000000-0000-0000-0000-000000000009"
   }
 ]
