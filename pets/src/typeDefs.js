@@ -7,7 +7,8 @@ export default gql`
   }
 
   type Mutation {
-    pet(body: PetInput!): Pet
+    create(body: CreatePetInput!): Pet
+    update(id: ID!, body: UpdatePetInput!): Pet
   }
 
   type Pet {
@@ -19,12 +20,20 @@ export default gql`
     breed: String
   }
 
-  input PetInput {
+  input CreatePetInput {
     name: String!
     type: PetType!
     colour: String = "n/a"
     age: Int = 0
     breed: String = "n/a"
+  }
+
+  input UpdatePetInput {
+    name: String
+    type: PetType
+    colour: String
+    age: Int
+    breed: String
   }
 
   enum PetType {

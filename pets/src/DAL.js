@@ -1,28 +1,62 @@
 import Logger from './Logger';
-import { readJson, getUniqueId } from './utils';
+import { readFile, writeFile, getUniqueId } from './utils';
 
-let pets = [];
-
-const loadData = async () => {
+const readData = async () => {
   try {
-    pets = await readJson('data.json');
+    const data = await readFile('data.json');
+    return JSON.parse(data.toString());
   } catch (err) {
-    Logger.error(`${err.message}. Exiting now...`, 'FileReader');
-    process.exit(0);
+    Logger.error(err.message, 'DataReader');
+    throw new Error(err);
   }
 };
 
-loadData();
+const writeData = async content => {
+  try {
+    await writeFile('data.json', JSON.stringify(content));
+  } catch (err) {
+    Logger.error(err.message, 'DataWriter');
+    throw new Error(err);
+  }
+};
 
-export const create = body => {
+export const create = async body => {
+  const pets = await readData();
   const newPet = {
     ...body,
     id: getUniqueId(),
   };
-  pets.push(newPet);
+  await writeData([...pets, newPet]);
   return newPet;
 };
 
-export const findById = id => pets.find(p => p.id === id);
+export const update = async (id, body) => {
+  const pets = await readData();
+  let updatedPet = null;
+  const updatedPets = pets.map(pet => {
+    if (pet.id === id) {
+      updatedPet = {
+        ...pet,
+        ...body,
+        id,
+      };
+      return updatedPet;
+    }
 
-export const findAll = () => pets;
+    return pet;
+  });
+
+  if (updatedPet) {
+    await writeData(updatedPets);
+    return updatedPet;
+  }
+
+  throw new Error('Not found');
+};
+
+export const findById = async id => {
+  const pets = await readData();
+  return pets.find(p => p.id === id);
+};
+
+export const findAll = readData;

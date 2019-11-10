@@ -1,4 +1,4 @@
-import { create, findAll, findById } from './DAL';
+import { create, update, findAll, findById } from './DAL';
 
 export default {
   Query: {
@@ -6,6 +6,7 @@ export default {
     pets: findAll,
   },
   Mutation: {
-    pet: (_, { body }) => create(body),
+    create: (_, { body }) => create(body),
+    update: (_, { id, body }) => update(id, body),
   },
 };

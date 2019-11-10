@@ -2,7 +2,7 @@ import chai, { expect } from 'chai';
 import chaiJson from 'chai-json';
 import chaiUuid from 'chai-uuid';
 
-import { getUniqueId, readJson } from '../src/utils';
+import { getUniqueId, readFile } from '../src/utils';
 
 chai.use(chaiJson);
 chai.use(chaiUuid);
@@ -16,17 +16,14 @@ describe('Utility functions', () => {
   });
 
   describe('JSON Reader', () => {
-    it('should read JSON files', done => {
-      readJson('data.json')
-        .then(json => {
-          expect(json).to.be.a.jsonObj();
-          done();
-        })
+    it('should be able to read files', done => {
+      readFile('data.json')
+        .then(() => done())
         .catch(done);
     });
 
-    it('should throw an exception when it fails to locate a JSON files', done => {
-      readJson('pets.json').catch(() => done());
+    it('should throw an exception when it fails to locate a file', done => {
+      readFile('pets.json').catch(() => done());
     });
   });
 });
