@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  </head>
+  <body>
+    <div id="app">
+      <table style="width:100%;">
+        <thead>
+          <tr>
+            <th colspan="10"><h2>Welcome to Pet Store!</h2></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Pets Service</th>
+            <td>{{ petsServiceStatus }}</td>
+            <td>
+              <button
+                @click="getAllPets"
+                :disabled="petsServiceStatus !== 'connected'"
+              >
+                GET
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th>Owners Service</th>
+            <td>{{ ownersServiceStatus }}</td>
+            <td>
+              <button
+                @click="getAllOwners"
+                :disabled="ownersServiceStatus !== 'connected'"
+              >
+                GET
+              </button>
+            </td>
+            <td>
+              <button
+                @click="console.log"
+                :disabled="ownersServiceStatus !== 'connected'"
+              >
+                POST
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th colspan="10"><h2>Result</h2></th>
+                </tr>
+              </thead>
+              <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Colour</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="result in results"
+                  :key="result.id"
+                  style="text-align: center;"
+                >
+                  <td>{{result.name}}</td>
+                  <td>{{result.type}}</td>
+                  <td>{{result.breed}}</td>
+                  <td>{{result.age}}</td>
+                  <td>{{result.colour}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          petsServiceStatus: "connecting...",
+          ownersServiceStatus: "connecting...",
+          results: []
+        },
+        methods: {
+          updatePetsServiceStatus(val) {
+            this.petsServiceStatus = val;
+          },
+          updateOwnersServiceStatus(val) {
+            this.ownersServiceStatus = val;
+          },
+          getAllPets() {
+            fetch(`pets?query={ pets { id, name, type, colour, age, breed } }`)
+              .then(res => res.json())
+              .then(({ data }) => {
+                this.results = data.pets;
+              });
+          },
+          getAllOwners() {
+            fetch(`owners?query={ owners { id, name } }`)
+              .then(res => res.json())
+              .then(({ data }) => {
+                // this.results = data.pets;
+                console.log(data);
+              });
+          }
+        }
+      });
+
+      fetch("pets")
+        .then(response => {
+          if (response.status === 400) {
+            app.updatePetsServiceStatus("connected");
+          } else {
+            app.updatePetsServiceStatus("unknown error occured");
+          }
+        })
+        .catch(err => app.updatePetsServiceStatus(err.message));
+
+      fetch("owners")
+        .then(response => {
+          if (response.status === 400) {
+            app.updateOwnersServiceStatus("connected");
+          } else {
+            app.updateOwnersServiceStatus("unknown error occured");
+          }
+        })
+        .catch(err => app.updateOwnersServiceStatus(err.message));
+    </script>
+  </body>
+</html>
