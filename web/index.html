@@ -19,7 +19,7 @@
             <td>
               <button
                 @click="getAllPets"
-                :disabled="petsServiceStatus !== 'connected'"
+                :disabled="petsServiceStatus !== 'online'"
               >
                 GET
               </button>
@@ -31,7 +31,7 @@
             <td>
               <button
                 @click="getAllOwners"
-                :disabled="ownersServiceStatus !== 'connected'"
+                :disabled="ownersServiceStatus !== 'online'"
               >
                 GET
               </button>
@@ -39,7 +39,7 @@
             <td>
               <button
                 @click="console.log"
-                :disabled="ownersServiceStatus !== 'connected'"
+                :disabled="ownersServiceStatus !== 'online'"
               >
                 POST
               </button>
@@ -49,7 +49,7 @@
             <table style="width: 100%;">
               <thead>
                 <tr>
-                  <th colspan="10"><h2>Result</h2></th>
+                  <th colspan="10"><h2>Pets</h2></th>
                 </tr>
               </thead>
               <thead>
@@ -61,15 +61,44 @@
               </thead>
               <tbody>
                 <tr
-                  v-for="result in results"
-                  :key="result.id"
+                  v-for="pet in pets"
+                  :key="pet.id"
                   style="text-align: center;"
                 >
-                  <td>{{result.name}}</td>
-                  <td>{{result.type}}</td>
-                  <td>{{result.breed}}</td>
-                  <td>{{result.age}}</td>
-                  <td>{{result.colour}}</td>
+                  <td>{{pet.name}}</td>
+                  <td>{{pet.type}}</td>
+                  <td>{{pet.breed}}</td>
+                  <td>{{pet.age}}</td>
+                  <td>{{pet.colour}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tr>
+          <tr>
+            <table style="width: 100%;">
+              <thead>
+                <tr>
+                  <th colspan="10"><h2>Owners</h2></th>
+                </tr>
+              </thead>
+              <thead>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Pets</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="owner in owners"
+                  :key="'owner_' + owner.id"
+                  style="text-align: center;"
+                >
+                  <td>{{owner.name}}</td>
+                  <td>{{owner.address}}</td>
+                  <td>{{owner.phone}}</td>
+                  <td>{{owner.email}}</td>
+                  <td>{{owner.pets.map(p => p.name).join(', ')}}</td>
                 </tr>
               </tbody>
             </table>
@@ -82,9 +111,10 @@
       const app = new Vue({
         el: "#app",
         data: {
-          petsServiceStatus: "connecting...",
-          ownersServiceStatus: "connecting...",
-          results: []
+          petsServiceStatus: "contacting...",
+          ownersServiceStatus: "contacting...",
+          pets: [],
+          owners: []
         },
         methods: {
           updatePetsServiceStatus(val) {
@@ -97,15 +127,16 @@
             fetch(`pets?query={ pets { id, name, type, colour, age, breed } }`)
               .then(res => res.json())
               .then(({ data }) => {
-                this.results = data.pets;
+                this.pets = data.pets;
               });
           },
           getAllOwners() {
-            fetch(`owners?query={ owners { id, name } }`)
+            fetch(
+              `owners?query={ owners { id, name, address, email, phone, pets { id, name, type, colour, age, breed } } }`
+            )
               .then(res => res.json())
               .then(({ data }) => {
-                // this.results = data.pets;
-                console.log(data);
+                this.owners = data.owners;
               });
           }
         }
@@ -114,9 +145,12 @@
       fetch("pets")
         .then(response => {
           if (response.status === 400) {
-            app.updatePetsServiceStatus("connected");
+            setTimeout(() => {
+              app.updatePetsServiceStatus("online");
+              app.getAllPets();
+            }, 1500);
           } else {
-            app.updatePetsServiceStatus("unknown error occured");
+            app.updatePetsServiceStatus("errored");
           }
         })
         .catch(err => app.updatePetsServiceStatus(err.message));
@@ -124,9 +158,12 @@
       fetch("owners")
         .then(response => {
           if (response.status === 400) {
-            app.updateOwnersServiceStatus("connected");
+            setTimeout(() => {
+              app.getAllOwners();
+              app.updateOwnersServiceStatus("online");
+            }, 3000);
           } else {
-            app.updateOwnersServiceStatus("unknown error occured");
+            app.updateOwnersServiceStatus("errored");
           }
         })
         .catch(err => app.updateOwnersServiceStatus(err.message));
