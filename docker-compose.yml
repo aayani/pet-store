@@ -28,6 +28,7 @@ services:
       - "8080:8080"
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
+      - ./web/index.html:/usr/share/nginx/html/index.html
     depends_on:
       - pets
       - owners
