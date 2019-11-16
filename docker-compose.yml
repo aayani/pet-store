@@ -3,8 +3,6 @@ services:
   pets:
     build: "./pets"
     image: "pet-store-pets-service:latest"
-    ports:
-      - "3000:3000"
     volumes:
       - ./pets/data.json:/usr/src/app/data.json
     environment:
@@ -13,8 +11,6 @@ services:
   owners:
     build: "./owners"
     image: "pet-store-owners-service:latest"
-    ports:
-      - "3001:3001"
     volumes:
       - ./owners/data.json:/usr/src/app/data.json
     environment:
