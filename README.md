@@ -54,4 +54,4 @@ If everything goes well, the project can be viewed at [http://localhost:8080](ht
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
