@@ -32,6 +32,12 @@ yarn
 yarn build
 ```
 
+To run automated tests
+
+```
+yarn test
+```
+
 The services can be run in development mode
 
 ```
@@ -50,6 +56,7 @@ If everything goes well, the project can be viewed at [http://localhost:8080](ht
 
 ## Technologies
 
+- [Babel](https://babeljs.io) - Compile JavaScript to a primitive version
 - [Express](https://expressjs.com) - Web application framework for Node.js
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server) - Server for GraphQL
 - [Nginx](https://nginx.com) - Web server used for service discovery
