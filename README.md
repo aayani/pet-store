@@ -1,6 +1,6 @@
 # Pet Store
 
-A sample micro-services project built using [Node.js](https://nodejs.org) and [Docker](https://docker.com) for managing a pet store
+A sample micro-services project built using [Node.js](https://nodejs.org) and [Docker](https://docker.com) with GraphQL API for managing a pet store
 
 ## Getting Started
 
@@ -44,6 +44,15 @@ The services can be run in development mode
 yarn start:dev
 ```
 
+### Caveat
+
+Since owners service is dependent on pets service, make sure pets service is up anytime you are working with owners service _(testing, development etc.)_
+
+```
+cd pets
+yarn start:prod
+```
+
 ## Deployment
 
 To get the project up and running in a production ready environment run the following command
@@ -56,9 +65,10 @@ If everything goes well, the project can be viewed at [http://localhost:8080](ht
 
 ## Technologies
 
-- [Babel](https://babeljs.io) - Compile JavaScript to a primitive version
-- [Express](https://expressjs.com) - Web application framework for Node.js
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server) - Server for GraphQL
+- [Babel](https://babeljs.io) - Compile JavaScript to a primitive version
+- [Docker](https://docker.com) - OS level virtualization
+- [Express](https://expressjs.com) - Web application framework for Node.js
 - [Nginx](https://nginx.com) - Web server used for service discovery
 
 ## Support

@@ -10,7 +10,7 @@
     "start": "node dist/server.js",
     "start:dev": "NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
     "start:prod": "NODE_ENV=production npm-run-all clean compile start",
-    "test": "mocha --require @babel/register"
+    "test": "NODE_ENV=development mocha --require @babel/register"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.7",
