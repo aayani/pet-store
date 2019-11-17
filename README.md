@@ -40,7 +40,7 @@ To get the project up and running in a production ready environment run the foll
 docker-compose up --build
 ```
 
-If everything goes well, the project can now be viewed at [http://localhost:8080](http://localhost:8080)
+If everything goes well, the project can be viewed at [http://localhost:8080](http://localhost:8080)
 
 ## Technologies
 
