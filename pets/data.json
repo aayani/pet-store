@@ -5,7 +5,7 @@
     "colour": "black",
     "age": 2,
     "breed": "Huskie",
-    "id": "00000000-0000-0000-0000-000000000000"
+    "id": "10000000-0000-0000-0000-000000000000"
   },
   {
     "name": "Garfield",
@@ -13,6 +13,46 @@
     "colour": "orange",
     "age": 5,
     "breed": "Shorthair",
-    "id": "00000000-0000-0000-0000-000000000001"
+    "id": "10000000-0000-0000-0000-000000000001"
+  },
+  {
+    "name": "Coco",
+    "type": "cat",
+    "colour": "white",
+    "age": 3,
+    "breed": "Munchkin",
+    "id": "10000000-0000-0000-0000-000000000002"
+  },
+  {
+    "name": "Butch",
+    "type": "dog",
+    "colour": "grey",
+    "age": 3,
+    "breed": "Bull dog",
+    "id": "10000000-0000-0000-0000-000000000003"
+  },
+  {
+    "name": "Lassie",
+    "type": "dog",
+    "colour": "golden",
+    "age": 3,
+    "breed": "Labrador",
+    "id": "10000000-0000-0000-0000-000000000004"
+  },
+  {
+    "name": "Daisy",
+    "type": "cat",
+    "colour": "grey",
+    "age": 1,
+    "breed": "Siamese",
+    "id": "10000000-0000-0000-0000-000000000005"
+  },
+  {
+    "name": "Harry",
+    "type": "dog",
+    "colour": "black",
+    "age": 4,
+    "breed": "Doberman",
+    "id": "10000000-0000-0000-0000-000000000006"
   }
 ]
