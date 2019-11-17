@@ -4,6 +4,7 @@ export default gql`
   type Query {
     owner(id: ID!): Owner
     owners: [Owner]
+    pets(id: ID!): [Pet]
   }
 
   type Mutation {

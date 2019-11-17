@@ -99,3 +99,14 @@ export const removePet = async (ownerId, petId) => {
 
   throw new Error('Not found');
 };
+
+export const getOwnerPets = async ownerId => {
+  const [owners, pets] = await Promise.all([readData(), getAllPets()]);
+  const owner = owners.find(o => o.id === ownerId);
+
+  if (owner) {
+    return owner.pets.map(petId => pets.find(pet => pet.id === petId));
+  }
+
+  throw new Error('Not found');
+};
