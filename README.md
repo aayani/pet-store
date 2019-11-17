@@ -16,22 +16,20 @@ Before running the project on your system, make sure you have the following soft
 
 ### Installing
 
-To get the project up and running, navigate to the root directory of the project.
-
-To initialize the pets service, provide these commands in the terminal
+To get the project up and running, navigate to the root directory of the project and initialize the pets service by providing these commands to the terminal
 
 ```
 cd pets
-\yarn
-\yarn build
+yarn
+yarn build
 ```
 
 And to initialize the owners service
 
 ```
 cd owners
-\yarn
-\yarn build
+yarn
+yarn build
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
