@@ -32,6 +32,12 @@ yarn
 yarn build
 ```
 
+The services can be run in development mode
+
+```
+yarn start:dev
+```
+
 ## Deployment
 
 To get the project up and running in a production ready environment run the following command
