@@ -8,7 +8,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-Before running the application, make sure you have the following software installed on your system.
+Before running the project on your system, make sure you have the following software installed.
 
 - [yarn](https://yarnpkg.com) - fast and reliable dependency management
 - [docker](https://docker.com) - OS level virtualization to deliver packages called containers
@@ -16,18 +16,22 @@ Before running the application, make sure you have the following software instal
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+To get the project up and running, navigate to the root directory of the project.
 
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+To initialize the pets service, provide these commands in the terminal
 
 ```
-until finished
+cd pets
+\yarn
+\yarn build
+```
+
+And to initialize the owners service
+
+```
+cd owners
+\yarn
+\yarn build
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
