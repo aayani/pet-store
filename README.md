@@ -1,6 +1,6 @@
 # Pet Store
 
-A sample micro-service project for managing a pet store
+A sample micro-services project built using [Node.js](https://nodejs.org) and [Docker](https://docker.com) for managing a pet store
 
 ## Getting Started
 
@@ -11,7 +11,7 @@ These instructions will get you a copy of the project up and running on your loc
 Before running the application, make sure you have the following software installed on your system.
 
 - [yarn](https://yarnpkg.com) - fast and reliable dependency management
-- [docker](https://www.docker.com) - OS level virtualization to deliver packages called containers
+- [docker](https://docker.com) - OS level virtualization to deliver packages called containers
 - [docker-compose](https://docs.docker.com/compose) - tool for defining and running multi-container Docker applications
 
 ### Installing
