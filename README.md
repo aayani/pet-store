@@ -48,6 +48,10 @@ If everything goes well, the project can be viewed at [http://localhost:8080](ht
 - [Apollo Server](https://www.apollographql.com/docs/apollo-server) - Server for GraphQL
 - [Nginx](https://nginx.com) - Web server used for service discovery
 
+## Support
+
+Automated test suites are provided along with the services. The web client of the project is tested using Chrome & Firefox.
+
 ## Authors
 
 - **Wahaj Aayani** - _Initial work_ - [aayani](https://github.com/aayani)
