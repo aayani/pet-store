@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <title>Pet Store</title>
+  </head>
+  <body>
+    <div id="app">
+      <table style="width:100%;">
+        <thead>
+          <tr>
+            <th colspan="10"><h2>Welcome to Pet Store!</h2></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Pets Service</th>
+            <td>{{ petsServiceStatus }}</td>
+            <td>
+              <button
+                @click="getAllPets"
+                :disabled="petsServiceStatus !== 'online'"
+              >
+                GET
+              </button>
+            </td>
+            <td>
+              <button
+                @click="addPet"
+                :disabled="petsServiceStatus !== 'online'"
+              >
+                POST
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <th>Owners Service</th>
+            <td>{{ ownersServiceStatus }}</td>
+            <td>
+              <button
+                @click="getAllOwners"
+                :disabled="ownersServiceStatus !== 'online'"
+              >
+                GET
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <table style="width: 100%;" v-if="petsServiceStatus === 'online'">
+              <thead>
+                <tr>
+                  <th colspan="10"><h2>Pets</h2></th>
+                </tr>
+              </thead>
+              <thead>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Breed</th>
+                <th>Age</th>
+                <th>Colour</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="pet in pets"
+                  :key="pet.id"
+                  style="text-align: center;"
+                >
+                  <td>{{pet.name}}</td>
+                  <td>{{pet.type}}</td>
+                  <td>{{pet.breed}}</td>
+                  <td>{{pet.age}}</td>
+                  <td>{{pet.colour}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tr>
+          <tr>
+            <table style="width: 100%;" v-if="ownersServiceStatus === 'online'">
+              <thead>
+                <tr>
+                  <th colspan="10"><h2>Owners</h2></th>
+                </tr>
+              </thead>
+              <thead>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Pets</th>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="owner in owners"
+                  :key="'owner_' + owner.id"
+                  style="text-align: center;"
+                >
+                  <td>{{owner.name}}</td>
+                  <td>{{owner.address}}</td>
+                  <td>{{owner.phone}}</td>
+                  <td>{{owner.email}}</td>
+                  <td>{{owner.pets.map(p => p.name).join(', ')}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const app = new Vue({
+        el: "#app",
+        data: {
+          petsServiceStatus: "contacting...",
+          ownersServiceStatus: "contacting...",
+          pets: [],
+          owners: []
+        },
+        methods: {
+          updatePetsServiceStatus(val) {
+            this.petsServiceStatus = val;
+          },
+          updateOwnersServiceStatus(val) {
+            this.ownersServiceStatus = val;
+          },
+          addPet() {
+            const names = [
+              "Alfie",
+              "Molly",
+              "Poppy",
+              "Bella",
+              "Charlie",
+              "Daisy",
+              "Lola",
+              "Coco",
+              "Lassie",
+              "Teddy"
+            ];
+            const breeds = [
+              "Rottweiler",
+              "Siamese",
+              "Doberman",
+              "Munchkin",
+              "Pug",
+              "Balinese",
+              "Chihuahua",
+              "Persian",
+              "Maltese",
+              "LaPerm"
+            ];
+            const colours = [
+              "black",
+              "white",
+              "golden",
+              "brown",
+              "grey",
+              "orange"
+            ];
+            const breedIndex = Math.floor(Math.random() * breeds.length);
+
+            const newPet = {
+              name: names[Math.floor(Math.random() * names.length)],
+              type: breedIndex % 2 ? "cat" : "dog",
+              age: Math.floor(Math.random() * 7) + 1,
+              breed: breeds[breedIndex],
+              colour: colours[Math.floor(Math.random() * colours.length)]
+            };
+
+            fetch(`pets`, {
+              method: "POST",
+              body: JSON.stringify({
+                query: `mutation {  create(body: {name: "${newPet.name}", type: ${newPet.type}, age: ${newPet.age}, breed: "${newPet.breed}", colour: "${newPet.colour}"})
+                { id name type colour age breed  }}`
+              }),
+              headers: {
+                "Content-Type": "application/json"
+              }
+            })
+              .then(res => res.json())
+              .then(({ data: { create } }) => {
+                this.pets = [...this.pets, create];
+              })
+              .catch(console.error);
+          },
+          getAllPets() {
+            fetch(`pets?query={ pets { id, name, type, colour, age, breed } }`)
+              .then(res => res.json())
+              .then(({ data }) => {
+                this.pets = data.pets;
+              })
+              .catch(console.error);
+          },
+          getAllOwners() {
+            fetch(
+              `owners?query={ owners { id, name, address, email, phone, pets { id, name, type, colour, age, breed } } }`
+            )
+              .then(res => res.json())
+              .then(({ data }) => {
+                this.owners = data.owners;
+              })
+              .catch(console.error);
+          }
+        }
+      });
+
+      fetch("pets")
+        .then(response => {
+          if (response.status === 400) {
+            setTimeout(() => {
+              app.updatePetsServiceStatus("online");
+
+              setTimeout(app.getAllPets, 1000);
+            }, 1000);
+          } else {
+            app.updatePetsServiceStatus("errored");
+          }
+        })
+        .catch(err => app.updatePetsServiceStatus(err.message));
+
+      fetch("owners")
+        .then(response => {
+          if (response.status === 400) {
+            setTimeout(() => {
+              app.updateOwnersServiceStatus("online");
+
+              setTimeout(app.getAllOwners, 1000);
+            }, 1500);
+          } else {
+            app.updateOwnersServiceStatus("errored");
+          }
+        })
+        .catch(err => app.updateOwnersServiceStatus(err.message));
+    </script>
+  </body>
+</html>

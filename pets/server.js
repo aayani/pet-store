@@ -15,11 +15,11 @@ const server = new ApolloServer({
   introspection: process.env.NODE_ENV === 'development',
   playground: process.env.NODE_ENV === 'development',
 });
-server.applyMiddleware({ app, path: '/pets/graphql' });
+server.applyMiddleware({ app, path: '/graphql' });
 
 app.listen(3000, () =>
   Logger.info(
-    `🚀  GraphQL server running on http://localhost:3000/pets/graphql in "${process.env.NODE_ENV}" mode`,
+    `🚀  GraphQL server running on http://localhost:3000/graphql in "${process.env.NODE_ENV}" mode`,
     'Server'
   )
 );
