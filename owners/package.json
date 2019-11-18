@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "build": "npm-run-all test clean compile",
+    "build": "npm-run-all clean compile",
     "clean": "rimraf dist",
     "compile": "babel . --only server.js,src --out-dir dist",
     "lint": "eslint server.js src",
