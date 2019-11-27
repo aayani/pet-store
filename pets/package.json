@@ -8,9 +8,9 @@
     "compile": "babel . --only server.js,src --out-dir dist",
     "lint": "eslint server.js src",
     "start": "node dist/server.js",
-    "start:dev": "NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
-    "start:prod": "NODE_ENV=production npm-run-all clean compile start",
-    "test": "mocha --require @babel/register"
+    "start:dev": "cross-env NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
+    "start:prod": "cross-env NODE_ENV=production npm-run-all clean compile start",
+    "test": "cross-env NODE_ENV=development mocha --require @babel/register"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.7",
@@ -30,6 +30,7 @@
     "chai": "^4.2.0",
     "chai-arrays": "^2.0.0",
     "chai-uuid": "^1.0.6",
+    "cross-env": "^6.0.3",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
