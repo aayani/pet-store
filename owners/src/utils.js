@@ -16,7 +16,7 @@ export const doPost = (url, body) =>
     )
   );
 
-export const readFile = path =>
+export const readFile = (path) =>
   new Promise((resolve, reject) =>
     fs.readFile(path, (err, data) => {
       if (err) {
@@ -29,7 +29,7 @@ export const readFile = path =>
 
 export const writeFile = (path, data) =>
   new Promise((resolve, reject) =>
-    fs.writeFile(path, data, err => {
+    fs.writeFile(path, data, (err) => {
       if (err) {
         reject(err);
       }

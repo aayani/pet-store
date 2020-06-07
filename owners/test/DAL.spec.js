@@ -14,7 +14,7 @@ describe('Data Access Layer', () => {
       expect(owners).to.be.array();
     });
 
-    it('should be able retrieve an owner by id', async function() {
+    it('should be able retrieve an owner by id', async function () {
       const owners = await findAll();
 
       if (owners.length) {
@@ -39,7 +39,7 @@ describe('Data Access Layer', () => {
       if (
         owner &&
         owner.pets.find(
-          pet => pet.id === '10000000-0000-0000-0000-000000000001'
+          (pet) => pet.id === '10000000-0000-0000-0000-000000000001'
         )
       ) {
         return;

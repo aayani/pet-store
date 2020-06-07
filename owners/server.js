@@ -1,5 +1,3 @@
-import 'regenerator-runtime/runtime';
-
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
 
@@ -19,7 +17,7 @@ server.applyMiddleware({ app, path: '/graphql' });
 
 app.listen(3001, () =>
   Logger.info(
-    `🚀  GraphQL server running on http://localhost:3001/graphql in "${process.env.NODE_ENV}" mode`,
+    `🚀  GraphQL server (Owners Service) running on http://localhost:3001/graphql in "${process.env.NODE_ENV}" mode`,
     'Server'
   )
 );

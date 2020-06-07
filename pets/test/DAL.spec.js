@@ -14,7 +14,7 @@ describe('Data Access Layer', () => {
       expect(pets).to.be.array();
     });
 
-    it('should be able retrieve a pet by id', async function() {
+    it('should be able retrieve a pet by id', async function () {
       const pets = await findAll();
 
       if (pets.length) {
@@ -44,7 +44,7 @@ describe('Data Access Layer', () => {
 
       if (
         petsList.length + 1 !== updatedPetsList.length ||
-        !updatedPetsList.find(p => p.id === newPet.id)
+        !updatedPetsList.find((p) => p.id === newPet.id)
       ) {
         throw new Error();
       }

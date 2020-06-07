@@ -12,7 +12,7 @@ const readData = async () => {
   }
 };
 
-const writeData = async content => {
+const writeData = async (content) => {
   try {
     await writeFile('data.json', JSON.stringify(content));
   } catch (err) {
@@ -27,14 +27,14 @@ const getAllPets = () =>
     `{ "query": "query { pets {  id, name, type, colour, age, breed }}" }`
   ).then(({ data }) => data.pets);
 
-export const findById = async id => {
+export const findById = async (id) => {
   const [owners, pets] = await Promise.all([readData(), getAllPets()]);
-  const owner = owners.find(p => p.id === id);
+  const owner = owners.find((p) => p.id === id);
 
   if (owner) {
     return {
       ...owner,
-      pets: owner.pets.map(petId => pets.find(p => p.id === petId)),
+      pets: owner.pets.map((petId) => pets.find((p) => p.id === petId)),
     };
   }
 
@@ -44,19 +44,19 @@ export const findById = async id => {
 export const findAll = async () => {
   const [owners, pets] = await Promise.all([readData(), getAllPets()]);
 
-  return owners.map(owner => ({
+  return owners.map((owner) => ({
     ...owner,
-    pets: owner.pets.map(petId => pets.find(pet => pet.id === petId)),
+    pets: owner.pets.map((petId) => pets.find((pet) => pet.id === petId)),
   }));
 };
 
 export const addPet = async (ownerId, petId) => {
   const owners = await readData();
   let updatedOwner = null;
-  const updatedOwners = owners.map(owner => {
+  const updatedOwners = owners.map((owner) => {
     if (owner.id === ownerId) {
       // to ensure idempotency and avoid pet ID duplication
-      if (owner.pets.find(p => p === petId)) {
+      if (owner.pets.find((p) => p === petId)) {
         updatedOwner = owner;
       } else {
         updatedOwner = {
@@ -82,11 +82,11 @@ export const addPet = async (ownerId, petId) => {
 export const removePet = async (ownerId, petId) => {
   const owners = await readData();
   let updatedOwner = null;
-  const updatedOwners = owners.map(owner => {
+  const updatedOwners = owners.map((owner) => {
     if (owner.id === ownerId) {
       updatedOwner = {
         ...owner,
-        pets: owner.pets.filter(p => p !== petId),
+        pets: owner.pets.filter((p) => p !== petId),
       };
       return updatedOwner;
     }
@@ -100,12 +100,12 @@ export const removePet = async (ownerId, petId) => {
   throw new Error('Not found');
 };
 
-export const getOwnerPets = async ownerId => {
+export const getOwnerPets = async (ownerId) => {
   const [owners, pets] = await Promise.all([readData(), getAllPets()]);
-  const owner = owners.find(o => o.id === ownerId);
+  const owner = owners.find((o) => o.id === ownerId);
 
   if (owner) {
-    return owner.pets.map(petId => pets.find(pet => pet.id === petId));
+    return owner.pets.map((petId) => pets.find((pet) => pet.id === petId));
   }
 
   throw new Error('Not found');

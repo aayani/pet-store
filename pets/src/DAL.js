@@ -11,7 +11,7 @@ const readData = async () => {
   }
 };
 
-const writeData = async content => {
+const writeData = async (content) => {
   try {
     await writeFile('data.json', JSON.stringify(content));
   } catch (err) {
@@ -20,7 +20,7 @@ const writeData = async content => {
   }
 };
 
-export const create = async body => {
+export const create = async (body) => {
   const pets = await readData();
   const newPet = {
     ...body,
@@ -30,15 +30,15 @@ export const create = async body => {
   return newPet;
 };
 
-export const remove = async id => {
+export const remove = async (id) => {
   const pets = await readData();
-  await writeData(pets.filter(pet => pet.id !== id));
+  await writeData(pets.filter((pet) => pet.id !== id));
 };
 
 export const update = async (id, body) => {
   const pets = await readData();
   let updatedPet = null;
-  const updatedPets = pets.map(pet => {
+  const updatedPets = pets.map((pet) => {
     if (pet.id === id) {
       updatedPet = {
         ...pet,
@@ -59,9 +59,9 @@ export const update = async (id, body) => {
   throw new Error('Not found');
 };
 
-export const findById = async id => {
+export const findById = async (id) => {
   const pets = await readData();
-  return pets.find(p => p.id === id);
+  return pets.find((p) => p.id === id);
 };
 
 export const findAll = readData;
