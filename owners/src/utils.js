@@ -1,19 +1,16 @@
 import fs from 'fs';
-import request from 'request';
+import axios from 'axios';
 
-export const doPost = (url, body) =>
+export const doPost = (url, data) =>
   new Promise((resolve, reject) =>
-    request.post(
+    axios({
       url,
-      { headers: { 'Content-Type': 'application/json' }, body },
-      (err, data) => {
-        if (err) {
-          reject(err);
-        }
-
-        resolve(JSON.parse(data.body));
-      }
-    )
+      data,
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then((res) => resolve(res.data))
+      .catch((err) => reject(err))
   );
 
 export const readFile = (path) =>
