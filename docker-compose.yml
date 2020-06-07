@@ -2,7 +2,7 @@ version: "3"
 services:
   pets:
     build: "./pets"
-    image: "pet-store-pets-service:latest"
+    image: "pet-store/pets-service"
     volumes:
       - ./pets/data.json:/usr/src/app/data.json
     environment:
@@ -10,7 +10,7 @@ services:
 
   owners:
     build: "./owners"
-    image: "pet-store-owners-service:latest"
+    image: "pet-store/owners-service"
     volumes:
       - ./owners/data.json:/usr/src/app/data.json
     environment:
@@ -21,7 +21,7 @@ services:
   nginx:
     image: nginx:alpine
     ports:
-      - "8080:8080"
+      - 8080:8080
     volumes:
       - ./default.conf:/etc/nginx/conf.d/default.conf
       - ./web/index.html:/usr/share/nginx/html/index.html

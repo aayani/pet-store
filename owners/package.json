@@ -5,14 +5,15 @@
   "scripts": {
     "build": "npm-run-all clean compile",
     "clean": "rimraf dist",
-    "compile": "babel . --only server.js,src --out-dir dist",
-    "lint": "eslint server.js src test --quiet --fix",
+    "compile": "babel src --out-dir dist",
+    "lint": "eslint src test --quiet --fix",
     "start": "node dist/server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon --ignore data.json --exec babel-node server.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --ignore data.json --exec babel-node src/server.js",
     "start:prod": "cross-env NODE_ENV=production npm-run-all clean compile start",
     "test": "cross-env NODE_ENV=development mocha --require @babel/register"
   },
   "dependencies": {
+    "@babel/runtime": "^7.10.2",
     "apollo-server-express": "^2.14.2",
     "axios": "^0.19.2",
     "chalk": "^4.0.0",
